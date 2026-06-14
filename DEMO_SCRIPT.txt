@@ -1,0 +1,134 @@
+MEDSOC — DEMO VIDEO SCRIPT
+3 minutes exactly. Record with OBS Studio or Loom, then upload to YouTube.
+Read at conversational pace. Pause where marked [PAUSE].
+
+UPLOAD TO: YouTube (unlisted is fine, just needs to be public-access)
+WHAT TO SHOW: Your screen — the deployed Netlify dashboard (index.html)
+RESOLUTION: 1920×1080 preferred
+=================================================================
+
+[OPEN: Browser with MEDSOC dashboard loaded. Status indicators blinking
+at top right. No events yet — placeholder text visible in threat feed.]
+
+─── 0:00 – 0:30 · INTRO ───────────────────────────────────────
+
+"I'm a Nurse Manager at Federal Teaching Hospital, Gombe, Nigeria.
+And I've watched ransomware shut down hospitals in my country —
+locking EHR systems mid-surgery, corrupting radiology archives,
+knocking out ICU monitoring.
+
+Most Nigerian hospitals have no automated threat detection.
+The IT team is two people. They are overwhelmed.
+
+This is MEDSOC — Medical Security Operations Center.
+A four-agent autonomous security system built specifically for hospitals —
+powered by Splunk MCP Server and Foundation-sec."
+
+[PAUSE 1 second — first LOW severity noise events appearing in the feed]
+
+─── 0:30 – 1:10 · FIRST THREAT ────────────────────────────────
+
+[The CRITICAL EHR access event appears in the feed. Click it.]
+
+"MEDSOC's Watchdog Agent just detected an anomaly via Splunk MCP Server —
+a doctor's account accessing 47 patient records at 2:34 AM,
+outside their assigned ward and care team.
+
+That's a HIPAA violation in progress.
+
+Watch what happens — I'll click the alert."
+
+[Click the CRITICAL alert. Agent cards begin animating.]
+
+"Four agents activate in sequence.
+
+First — Watchdog has already run the SPL query against our EHR access index.
+Watch the Agent Log on the right — you can see the exact Splunk query
+that triggered this alert."
+
+[PAUSE — Watchdog shows 'Anomaly confirmed'. Triage card activates.]
+
+─── 1:10 – 1:50 · AGENT PIPELINE ──────────────────────────────
+
+"Agent 2 — Triage — is now calling Foundation-sec-1.1-8b-instruct.
+That's Splunk's security-tuned hosted model, trained on SIEM machine data.
+It scores this threat at 9.2 out of 10."
+
+[Score card appears — 9.2/10, red ring, tags visible.]
+
+"Tags: HIPAA Violation. Insider Threat. Patient Data at Risk.
+MITRE ATT&CK: T1078 — Valid Accounts.
+Confidence: 94 percent.
+
+Foundation-sec natively understands Splunk field names and event formats —
+I didn't need to fine-tune it or write few-shot examples."
+
+[Investigation agent card activates.]
+
+"Agent 3 — Investigation — is now running three correlated SPL queries
+via the MCP Server to map blast radius:
+47 records across 3 wards, 28 minutes, no prior similar pattern
+in 90 days of baseline."
+
+[PAUSE — Investigation shows 'Correlated'. Response card activates.]
+
+─── 1:50 – 2:30 · HUMAN IN THE LOOP ───────────────────────────
+
+[Response card activates. Action panel appears at bottom.]
+
+"And now the Response Agent has built a playbook.
+Five actions: account suspension, DPO notification, HIPAA audit,
+CISO escalation, forensic log preservation.
+
+But here's the critical design decision —"
+
+[Point at the HITL note in the action panel.]
+
+"MEDSOC never executes account-level actions autonomously.
+A Clinical IT Staff member must approve.
+
+In a hospital, isolating a device or suspending a clinician's account
+has patient safety consequences.
+AI handles the noise. Humans handle the judgment calls."
+
+[Click 'Approve & Execute' button.]
+
+"I'm approving. Watch the playbook execute."
+
+[Actions tick off one by one with green checkmarks.]
+
+"All five actions executed. Incident closed. Full audit trail generated
+for HIPAA and NDPA 2023 compliance evidence."
+
+─── 2:30 – 3:00 · CLOSE ───────────────────────────────────────
+
+[Pan to Agent Log on the right — showing Watchdog, Triage, Investigation,
+Response entries stacked.]
+
+"Everything you've seen — the SPL queries, the Foundation-sec scoring,
+the investigation correlation, the playbook — runs through Splunk MCP Server.
+
+The architecture is production-ready:
+async Python pipeline, six clinical indexes, five threat playbooks,
+full sim layer for demo privacy compliance.
+
+MEDSOC targets the 44 federal teaching hospitals in Nigeria —
+and eventually, 700 million people across West Africa
+who depend on hospitals that currently have no automated security.
+
+This is MEDSOC. Splunk as the intelligence backbone.
+Clinical authority as the differentiator.
+Human judgment as the final gate."
+
+[END — let the dashboard run for 2–3 seconds after last word.]
+
+=================================================================
+RECORDING CHECKLIST:
+□ Dashboard loaded at correct Netlify URL
+□ Browser zoom at 100% (not zoomed in or out)
+□ No browser notifications visible
+□ System notifications turned off (Do Not Disturb)
+□ Microphone test done before recording
+□ Record at 1920×1080
+□ Upload to YouTube → copy URL → paste into Devpost
+=================================================================

@@ -1,0 +1,110 @@
+MEDSOC — DEVPOST SUBMISSION COPY
+=================================================================
+
+── PROJECT NAME ────────────────────────────────────────────────
+MEDSOC
+
+── TAGLINE (one line under the title) ──────────────────────────
+A 4-agent autonomous security operations system built specifically for hospital IT infrastructure.
+
+── DEMO VIDEO URL ──────────────────────────────────────────────
+[Paste your YouTube URL here after uploading]
+
+── TRY IT OUT / PROJECT LINKS ──────────────────────────────────
+Live Demo:  [https://medsoc-nine.vercel.app/]
+GitHub:     [https://github.com/validivar/medsoc]
+
+── TRACK ───────────────────────────────────────────────────────
+Security
+
+── BUILT WITH (tags — add all of these) ────────────────────────
+splunk, splunk-mcp-server, foundation-sec, splunk-hosted-models,
+splunk-ai-assistant, python, asyncio, javascript, html5, css3,
+healthcare-security, siem, mitre-attck, hipaa, agentic-ai,
+human-in-the-loop, clinical-it, iomt, ehr-security
+
+=================================================================
+── INSPIRATION ─────────────────────────────────────────────────
+
+ I have watched ransomware paralyze hospitals across Nigeria and sub-Saharan Africa — locking EHR systems mid-surgery, corrupting radiology archives, shutting down ICU monitoring. The average hospital in my country has no automated threat detection. The IT team is two people. They are overwhelmed.
+
+Simultaneously, I watched Splunk release the MCP Server in February 2026 — a bridge between AI agents and the machine data that hospitals already generate: Epic access logs, medical device network flows, Windows event logs from clinical workstations. Foundation-sec, Splunk's security-tuned LLM, launched the same month. The capability stack to solve this problem appeared in one release cycle.
+
+MEDSOC is my answer: a four-agent autonomous security operations system built specifically for clinical IT — using Splunk as the intelligence backbone and clinical domain knowledge as the differentiator. Not generic enterprise IT. Hospitals. Because that is where the stakes are highest and the defenses are lowest.
+
+=================================================================
+── WHAT IT DOES ────────────────────────────────────────────────
+
+MEDSOC is an agentic Medical Security Operations Center that monitors, detects, investigates, and responds to cybersecurity threats across a hospital's entire IT infrastructure — using Splunk MCP Server as the primary data interface.
+
+Four agents work in an autonomous pipeline:
+
+① WATCHDOG AGENT
+Continuously polls Splunk via the MCP Server search tool across six clinical IT indexes: ehr_access, iomt_devices, endpoint, auth_events, network, and vulnerability. Polling intervals are calibrated to clinical risk — ransomware patterns check every 15 seconds, PACS exfiltration every 45 seconds. Threshold rules are tuned to hospital-specific patterns: after-hours EHR access volumes, medical device outbound to threat intel IPs, file encryption rates on clinical workstations.
+
+② TRIAGE AGENT
+Sends every anomaly to Splunk's Foundation-sec-1.1-8b-instruct hosted model. Foundation-sec is trained on security machine data and natively understands Splunk field names, SPL event formats, and SIEM threat patterns — making it ideal for clinical IT telemetry analysis. Output: threat score 0–10, MITRE ATT&CK technique mapping, clinical impact dimensions (patient safety, PHI risk, care continuity), applicable regulatory frameworks (HIPAA, NDPA 2023 Nigeria), and human escalation decision.
+
+③ INVESTIGATION AGENT
+Runs 3–6 correlated SPL queries per incident via MCP Server to build a complete incident picture. Maps blast radius (affected hosts, users, data volumes), constructs an ordered incident timeline, and generates a clinical risk statement that Clinical IT Staff see when deciding whether to approve response actions.
+
+④ RESPONSE AGENT
+Selects from five clinical playbooks (CLINICAL-BREACH-001 through EXFIL-DICOM-001), executes non-destructive actions immediately, and gates account suspension, network isolation, and device quarantine on explicit human-in-the-loop approval. Every executed action is logged to a tamper-evident audit trail for HIPAA and NDPA compliance evidence.
+
+Threat scenarios covered:
+- After-hours EHR access (insider threat / unauthorized patient record access)
+- Medical device C2 beaconing (IoMT compromise — IV pumps, ventilators)
+- Ransomware encryption loop (clinical workstations, PACS archives)
+- Nursing account credential stuffing (external attacker, dark web breach list)
+- PACS imaging data exfiltration (service account abuse, PHI transfer)
+
+The human-in-the-loop design is deliberate: MEDSOC never autonomously suspends accounts or isolates patient-connected devices without a clinical IT staff member confirming the action. AI handles the noise. Humans handle the judgment calls.
+
+=================================================================
+── HOW WE BUILT IT ─────────────────────────────────────────────
+
+Backend: Python 3.12 with asyncio for the concurrent multi-agent pipeline. Each agent runs as an independent coroutine, communicating through a shared async queue. The orchestrator wires them together and manages lifecycle.
+
+Splunk MCP Server integration: The Watchdog and Investigation agents use the MCP client SDK to call Splunk's search, list_indexes, get_index_info, and create_alert tools. SPL queries are constructed using parameterized builders in mcp_client.py — no raw string injection. The MCP Server's standardized tool interface means the same agent code works against Splunk Enterprise and Splunk Cloud.
+
+Foundation-sec-1.1-8b-instruct: The Triage Agent POSTs to Splunk's Hosted Models endpoint with a structured prompt that includes the raw Splunk event, the triggering SPL query, and the alert metadata. We prompt the model to respond exclusively in JSON (no markdown, no preamble) and parse the structured output into a typed ThreatAssessment dataclass. Temperature is set to 0.1 for deterministic threat scoring.
+
+Splunk AI Assistant: Used during development to generate and validate SPL queries across all six clinical indexes. The natural-language SPL generation capability is exposed to Clinical IT Staff in the dashboard for ad-hoc investigation.
+
+Frontend: A single-file HTML dashboard (no build step, no framework dependencies) with a JavaScript simulation layer that mirrors the Splunk MCP Server response schema. The sim layer generates FHIR-aligned synthetic clinical IT events for demo mode — healthcare privacy regulations (NDPA 2023, HIPAA) prohibit real PHI in non-production demos.
+
+Demo environment: deployed via Netlify Drop (drag-and-drop, zero config).
+
+=================================================================
+── CHALLENGES ──────────────────────────────────────────────────
+
+The hardest challenge was the human-in-the-loop design. Most agentic systems treat human approval as a UX afterthought — a modal dialog before the API call. In a hospital, the stakes are different: isolating a medical device from the network can kill a patient if their IV pump stops responding. Every HITL gate in MEDSOC had to explicitly account for patient safety first, network security second. The Response Agent surfaces a clinical impact statement before any patient-connected action, derived from the Investigation Agent's blast radius analysis.
+
+The second challenge was SPL query design for clinical IT. Hospital machine data has different patterns than enterprise IT: medical devices log in DICOM-adjacent formats, EHR systems use Epic audit schemas, clinical workstations share drives across departments in ways that corporate workstations don't. Every SPL query was written with clinical context awareness — not copied from generic SOC playbooks.
+
+=================================================================
+── ACCOMPLISHMENTS ─────────────────────────────────────────────
+
+Building a complete, production-architecture agentic security system — four agents, five playbooks, six Splunk indexes, Foundation-sec integration, MCP Server client, HITL approval gate, and full audit trail — in under 28 hours as a solo practitioner, while holding a clinical management role at a Federal Teaching Hospital.
+
+The architecture diagram and codebase are genuinely production-ready: typed dataclasses, async/await throughout, proper error handling and fallbacks, environment-variable configuration, and clear separation between sim mode and production mode. This is not a hackathon prototype dressed as production software. It is production software demonstrated in sim mode for privacy compliance.
+
+=================================================================
+── WHAT WE LEARNED ─────────────────────────────────────────────
+
+Foundation-sec-1.1-8b-instruct is remarkably accurate at healthcare security threat classification when given raw Splunk events. The model's training on SIEM machine data means it correctly identifies clinical IT threat patterns — EHR access anomalies, IoMT beacon intervals, ransomware entropy signatures — without any fine-tuning or few-shot examples. The security-specific training shows.
+
+The Splunk MCP Server's standardized tool interface is genuinely agent-friendly. The search tool's SPL passthrough means agents can express arbitrarily complex queries without any API translation layer. Building a multi-agent pipeline on top of MCP is significantly cleaner than polling the Splunk REST API directly.
+
+=================================================================
+── WHAT'S NEXT FOR MEDSOC ──────────────────────────────────────
+
+Phase 1 (Q3 2026): Production pilot at Federal Teaching Hospital, Gombe. Deploy against the live Splunk instance, ingest real (de-identified) telemetry, calibrate thresholds against actual Nigerian hospital IT baseline.
+
+Phase 2 (Q4 2026): Expand to the 24 federal teaching hospitals in Nigeria under the SERVICOM framework. Package as a managed service via Senary Systems (Health vertical) — monthly SaaS fee covers Splunk Cloud + MEDSOC managed agent operations.
+
+Phase 3 (2027): Extend to ECOWAS member states. Partner with African Development Bank health infrastructure programs for subsidized deployment in public teaching hospitals across West Africa.
+
+The addressable market is real: 44 federal tertiary hospitals in Nigeria, 700+ general hospitals, and an entire continent that is systematically undertargeted by enterprise security vendors while being systematically targeted by ransomware operators.
+
+=================================================================

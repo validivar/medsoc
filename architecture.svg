@@ -1,0 +1,200 @@
+<svg viewBox="0 0 900 560" xmlns="http://www.w3.org/2000/svg" font-family="'JetBrains Mono', 'Fira Code', monospace">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#06091a"/>
+      <stop offset="100%" stop-color="#0d1226"/>
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#00d4c8"/>
+      <stop offset="100%" stop-color="#0066ff"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#00d4c8" opacity="0.7"/>
+    </marker>
+    <marker id="arrowGreen" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#65d67e" opacity="0.8"/>
+    </marker>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="560" fill="url(#bg)" rx="12"/>
+  <rect width="900" height="560" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="1" rx="12"/>
+
+  <!-- Title -->
+  <text x="450" y="34" text-anchor="middle" fill="#ffffff" font-size="15" font-weight="600" letter-spacing="0.12em">MEDSOC</text>
+  <text x="450" y="52" text-anchor="middle" fill="#7a8db5" font-size="10" letter-spacing="0.07em">MEDICAL SECURITY OPERATIONS CENTER — ARCHITECTURE</text>
+  <line x1="80" y1="60" x2="820" y2="60" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+
+  <!-- ── Layer labels ──────────────────────────────────── -->
+  <text x="22" y="130" fill="#3d4f75" font-size="9" letter-spacing="0.1em" transform="rotate(-90,22,130)">DATA SOURCES</text>
+  <text x="22" y="260" fill="#3d4f75" font-size="9" letter-spacing="0.1em" transform="rotate(-90,22,260)">SPLUNK PLATFORM</text>
+  <text x="22" y="400" fill="#3d4f75" font-size="9" letter-spacing="0.1em" transform="rotate(-90,22,400)">AGENT LAYER</text>
+  <text x="22" y="510" fill="#3d4f75" font-size="9" letter-spacing="0.1em" transform="rotate(-90,22,510)">OUTPUT</text>
+
+  <!-- ── ROW 1: Data sources ───────────────────────────── -->
+  <!-- EHR -->
+  <rect x="80"  y="78" width="130" height="54" rx="6" fill="#131b33" stroke="#1a2444" stroke-width="1"/>
+  <rect x="80"  y="78" width="130" height="4"  rx="3" fill="#7c6dfa"/>
+  <text x="145" y="100" text-anchor="middle" fill="#dce8ff" font-size="11" font-weight="500">Epic EHR</text>
+  <text x="145" y="116" text-anchor="middle" fill="#7a8db5" font-size="9">index=ehr_access</text>
+  <text x="145" y="128" text-anchor="middle" fill="#3d4f75" font-size="8">UROLOGY · PEDS · ICU</text>
+
+  <!-- IoMT -->
+  <rect x="230" y="78" width="130" height="54" rx="6" fill="#131b33" stroke="#1a2444" stroke-width="1"/>
+  <rect x="230" y="78" width="130" height="4"  rx="3" fill="#ff7f50"/>
+  <text x="295" y="100" text-anchor="middle" fill="#dce8ff" font-size="11" font-weight="500">Medical Devices</text>
+  <text x="295" y="116" text-anchor="middle" fill="#7a8db5" font-size="9">index=iomt_devices</text>
+  <text x="295" y="128" text-anchor="middle" fill="#3d4f75" font-size="8">IV Pumps · Ventilators</text>
+
+  <!-- Endpoint -->
+  <rect x="380" y="78" width="130" height="54" rx="6" fill="#131b33" stroke="#1a2444" stroke-width="1"/>
+  <rect x="380" y="78" width="130" height="4"  rx="3" fill="#ff4757"/>
+  <text x="445" y="100" text-anchor="middle" fill="#dce8ff" font-size="11" font-weight="500">Workstations</text>
+  <text x="445" y="116" text-anchor="middle" fill="#7a8db5" font-size="9">index=endpoint</text>
+  <text x="445" y="128" text-anchor="middle" fill="#3d4f75" font-size="8">EDR · CrowdStrike</text>
+
+  <!-- Auth -->
+  <rect x="530" y="78" width="130" height="54" rx="6" fill="#131b33" stroke="#1a2444" stroke-width="1"/>
+  <rect x="530" y="78" width="130" height="4"  rx="3" fill="#ffc107"/>
+  <text x="595" y="100" text-anchor="middle" fill="#dce8ff" font-size="11" font-weight="500">Active Directory</text>
+  <text x="595" y="116" text-anchor="middle" fill="#7a8db5" font-size="9">index=auth_events</text>
+  <text x="595" y="128" text-anchor="middle" fill="#3d4f75" font-size="8">LDAP · AD · SSO</text>
+
+  <!-- Network -->
+  <rect x="680" y="78" width="140" height="54" rx="6" fill="#131b33" stroke="#1a2444" stroke-width="1"/>
+  <rect x="680" y="78" width="140" height="4"  rx="3" fill="#4ad991"/>
+  <text x="750" y="100" text-anchor="middle" fill="#dce8ff" font-size="11" font-weight="500">Network / PACS</text>
+  <text x="750" y="116" text-anchor="middle" fill="#7a8db5" font-size="9">index=network</text>
+  <text x="750" y="128" text-anchor="middle" fill="#3d4f75" font-size="8">NGFW · DICOM</text>
+
+  <!-- ── Downward arrows to Splunk ───────────────────────── -->
+  <line x1="145" y1="132" x2="145" y2="168" stroke="#00d4c8" stroke-width="1" stroke-dasharray="3,3" opacity="0.4" marker-end="url(#arrow)"/>
+  <line x1="295" y1="132" x2="295" y2="168" stroke="#00d4c8" stroke-width="1" stroke-dasharray="3,3" opacity="0.4" marker-end="url(#arrow)"/>
+  <line x1="445" y1="132" x2="445" y2="168" stroke="#00d4c8" stroke-width="1" stroke-dasharray="3,3" opacity="0.4" marker-end="url(#arrow)"/>
+  <line x1="595" y1="132" x2="595" y2="168" stroke="#00d4c8" stroke-width="1" stroke-dasharray="3,3" opacity="0.4" marker-end="url(#arrow)"/>
+  <line x1="750" y1="132" x2="750" y2="168" stroke="#00d4c8" stroke-width="1" stroke-dasharray="3,3" opacity="0.4" marker-end="url(#arrow)"/>
+
+  <!-- ── ROW 2: Splunk Platform ────────────────────────── -->
+  <!-- Splunk Enterprise box -->
+  <rect x="80" y="172" width="740" height="80" rx="8" fill="#0d1226" stroke="#1a2444" stroke-width="1.5"/>
+  <rect x="80" y="172" width="740" height="5"  rx="4" fill="url(#accentGrad)" opacity="0.7"/>
+
+  <!-- Splunk logo area -->
+  <text x="130" y="202" fill="#65d67e" font-size="11" font-weight="700" letter-spacing="0.1em">SPLUNK ENTERPRISE</text>
+  <text x="130" y="218" fill="#7a8db5" font-size="9">Machine Data Lake · 6 clinical indexes · SPL search engine</text>
+
+  <!-- Splunk MCP Server badge -->
+  <rect x="560" y="185" width="230" height="52" rx="6" fill="#0f1629" stroke="rgba(0,212,200,0.3)" stroke-width="1.5"/>
+  <text x="675" y="203" text-anchor="middle" fill="#00d4c8" font-size="10" font-weight="700" letter-spacing="0.08em">SPLUNK MCP SERVER</text>
+  <text x="675" y="218" text-anchor="middle" fill="#7a8db5" font-size="9">GA Feb 4, 2026</text>
+  <text x="675" y="230" text-anchor="middle" fill="#3d4f75" font-size="8">search · list_indexes · create_alert</text>
+
+  <!-- Foundation-sec badge -->
+  <rect x="310" y="185" width="220" height="52" rx="6" fill="#0f1629" stroke="rgba(101,214,126,0.3)" stroke-width="1.5"/>
+  <text x="420" y="203" text-anchor="middle" fill="#65d67e" font-size="10" font-weight="700" letter-spacing="0.06em">FOUNDATION-SEC-1.1-8B</text>
+  <text x="420" y="218" text-anchor="middle" fill="#7a8db5" font-size="9">Splunk Hosted Models (GA Feb 18, 2026)</text>
+  <text x="420" y="230" text-anchor="middle" fill="#3d4f75" font-size="8">Security-tuned LLM · SIEM-native</text>
+
+  <!-- AI Assistant badge -->
+  <rect x="95"  y="185" width="195" height="52" rx="6" fill="#0f1629" stroke="rgba(124,109,250,0.25)" stroke-width="1"/>
+  <text x="192" y="203" text-anchor="middle" fill="#9d8ff5" font-size="10" font-weight="700" letter-spacing="0.06em">SPLUNK AI ASSISTANT</text>
+  <text x="192" y="218" text-anchor="middle" fill="#7a8db5" font-size="9">SPL generation · natural language</text>
+  <text x="192" y="230" text-anchor="middle" fill="#3d4f75" font-size="8">Splunk Developer Tools</text>
+
+  <!-- ── MCP arrows down ─────────────────────────────── -->
+  <!-- MCP Server to Watchdog -->
+  <line x1="675" y1="252" x2="675" y2="290" stroke="#00d4c8" stroke-width="1.5" opacity="0.6" marker-end="url(#arrow)"/>
+  <line x1="675" y1="271" x2="192" y2="271" stroke="#00d4c8" stroke-width="1" opacity="0.25" stroke-dasharray="4,3"/>
+  <line x1="192" y1="252" x2="192" y2="290" stroke="#9d8ff5" stroke-width="1" opacity="0.5" marker-end="url(#arrow)"/>
+  <line x1="420" y1="252" x2="420" y2="290" stroke="#65d67e" stroke-width="1.5" opacity="0.6" marker-end="url(#arrowGreen)"/>
+
+  <!-- ── ROW 3: Agents ──────────────────────────────── -->
+  <!-- Agent 1: Watchdog -->
+  <rect x="80"  y="294" width="170" height="90" rx="8" fill="#131b33" stroke="#7c6dfa" stroke-width="1.5"/>
+  <rect x="80"  y="294" width="170" height="5"  rx="4" fill="#7c6dfa"/>
+  <text x="165" y="318" text-anchor="middle" fill="#dce8ff" font-size="11" font-weight="600">① WATCHDOG</text>
+  <text x="165" y="334" text-anchor="middle" fill="#7a8db5" font-size="9">Polls Splunk via MCP</text>
+  <text x="165" y="348" text-anchor="middle" fill="#7a8db5" font-size="9">Threshold detection</text>
+  <text x="165" y="362" text-anchor="middle" fill="#3d4f75" font-size="8">Splunk MCP Server</text>
+  <text x="165" y="376" text-anchor="middle" fill="#3d4f75" font-size="8">Poll: 15–45s per index</text>
+
+  <!-- Agent 2: Triage -->
+  <rect x="270" y="294" width="170" height="90" rx="8" fill="#131b33" stroke="#65d67e" stroke-width="1.5"/>
+  <rect x="270" y="294" width="170" height="5"  rx="4" fill="#65d67e"/>
+  <text x="355" y="318" text-anchor="middle" fill="#dce8ff" font-size="11" font-weight="600">② TRIAGE</text>
+  <text x="355" y="334" text-anchor="middle" fill="#7a8db5" font-size="9">Threat scoring 0–10</text>
+  <text x="355" y="348" text-anchor="middle" fill="#7a8db5" font-size="9">MITRE ATT&CK mapping</text>
+  <text x="355" y="362" text-anchor="middle" fill="#3d4f75" font-size="8">Foundation-sec-1.1-8b</text>
+  <text x="355" y="376" text-anchor="middle" fill="#3d4f75" font-size="8">Escalation: score ≥ 7.0</text>
+
+  <!-- Agent 3: Investigation -->
+  <rect x="460" y="294" width="170" height="90" rx="8" fill="#131b33" stroke="#00d4c8" stroke-width="1.5"/>
+  <rect x="460" y="294" width="170" height="5"  rx="4" fill="#00d4c8"/>
+  <text x="545" y="318" text-anchor="middle" fill="#dce8ff" font-size="11" font-weight="600">③ INVESTIGATION</text>
+  <text x="545" y="334" text-anchor="middle" fill="#7a8db5" font-size="9">Deep SPL correlation</text>
+  <text x="545" y="348" text-anchor="middle" fill="#7a8db5" font-size="9">Blast radius mapping</text>
+  <text x="545" y="362" text-anchor="middle" fill="#3d4f75" font-size="8">Splunk MCP · AI Assistant</text>
+  <text x="545" y="376" text-anchor="middle" fill="#3d4f75" font-size="8">3–6 SPL queries / alert</text>
+
+  <!-- Agent 4: Response -->
+  <rect x="650" y="294" width="170" height="90" rx="8" fill="#131b33" stroke="#ff4757" stroke-width="1.5"/>
+  <rect x="650" y="294" width="170" height="5"  rx="4" fill="#ff4757"/>
+  <text x="735" y="318" text-anchor="middle" fill="#dce8ff" font-size="11" font-weight="600">④ RESPONSE</text>
+  <text x="735" y="334" text-anchor="middle" fill="#7a8db5" font-size="9">Playbook selection</text>
+  <text x="735" y="348" text-anchor="middle" fill="#7a8db5" font-size="9">Human-in-the-Loop gate</text>
+  <text x="735" y="362" text-anchor="middle" fill="#3d4f75" font-size="8">5 clinical playbooks</text>
+  <text x="735" y="376" text-anchor="middle" fill="#3d4f75" font-size="8">Splunk SOAR · AD API</text>
+
+  <!-- Pipeline arrows -->
+  <line x1="250" y1="339" x2="270" y2="339" stroke="#00d4c8" stroke-width="2" opacity="0.7" marker-end="url(#arrow)"/>
+  <line x1="440" y1="339" x2="460" y2="339" stroke="#00d4c8" stroke-width="2" opacity="0.7" marker-end="url(#arrow)"/>
+  <line x1="630" y1="339" x2="650" y2="339" stroke="#00d4c8" stroke-width="2" opacity="0.7" marker-end="url(#arrow)"/>
+
+  <!-- ── ROW 4: Outputs ─────────────────────────────── -->
+  <!-- HITL UI -->
+  <rect x="80"  y="418" width="270" height="60" rx="6" fill="#0f1629" stroke="rgba(255,71,87,0.35)" stroke-width="1.5"/>
+  <text x="215" y="440" text-anchor="middle" fill="#ff4757" font-size="10" font-weight="700" letter-spacing="0.06em">MEDSOC DASHBOARD</text>
+  <text x="215" y="456" text-anchor="middle" fill="#7a8db5" font-size="9">Human-in-the-loop approval UI</text>
+  <text x="215" y="468" text-anchor="middle" fill="#3d4f75" font-size="8">Clinical IT Staff · Netlify · Single HTML file</text>
+
+  <!-- Splunk Alerts -->
+  <rect x="370" y="418" width="200" height="60" rx="6" fill="#0f1629" stroke="rgba(101,214,126,0.3)" stroke-width="1.5"/>
+  <text x="470" y="440" text-anchor="middle" fill="#65d67e" font-size="10" font-weight="700" letter-spacing="0.06em">SPLUNK ALERTS</text>
+  <text x="470" y="456" text-anchor="middle" fill="#7a8db5" font-size="9">Persistent saved searches</text>
+  <text x="470" y="468" text-anchor="middle" fill="#3d4f75" font-size="8">via create_alert (MCP tool)</text>
+
+  <!-- Audit Trail -->
+  <rect x="590" y="418" width="230" height="60" rx="6" fill="#0f1629" stroke="rgba(124,109,250,0.25)" stroke-width="1"/>
+  <text x="705" y="440" text-anchor="middle" fill="#9d8ff5" font-size="10" font-weight="700" letter-spacing="0.06em">AUDIT TRAIL</text>
+  <text x="705" y="456" text-anchor="middle" fill="#7a8db5" font-size="9">HIPAA / NDPA evidence log</text>
+  <text x="705" y="468" text-anchor="middle" fill="#3d4f75" font-size="8">Full provenance per incident</text>
+
+  <!-- Downward arrows from response to outputs -->
+  <line x1="735" y1="384" x2="735" y2="408" stroke="#ff4757" stroke-width="1.5" opacity="0.5" marker-end="url(#arrow)"/>
+  <line x1="735" y1="408" x2="705" y2="418" stroke="#ff4757" stroke-width="1" opacity="0.3"/>
+  <line x1="735" y1="408" x2="470" y2="418" stroke="#65d67e" stroke-width="1" opacity="0.3" stroke-dasharray="3,3"/>
+  <line x1="735" y1="408" x2="215" y2="418" stroke="#9d8ff5" stroke-width="1" opacity="0.3" stroke-dasharray="3,3"/>
+
+  <!-- MCP feedback loop (dashed, right side) -->
+  <path d="M 820 339 Q 870 339 870 440 Q 870 480 820 478" stroke="#00d4c8" stroke-width="1" fill="none" stroke-dasharray="4,3" opacity="0.2"/>
+
+  <!-- Hospital label -->
+  <text x="450" y="518" text-anchor="middle" fill="#3d4f75" font-size="9" letter-spacing="0.05em">Federal Teaching Hospital · Gombe, Nigeria · MEDSOC v1.0 · Splunk Agentic Ops Hackathon 2026</text>
+
+  <!-- Splunk prize badges at bottom -->
+  <rect x="114" y="530" width="158" height="16" rx="3" fill="rgba(0,212,200,0.07)" stroke="rgba(0,212,200,0.2)" stroke-width="0.5"/>
+  <text x="193" y="542" text-anchor="middle" fill="#00d4c8" font-size="8" letter-spacing="0.05em">■ Best Use of Splunk MCP Server</text>
+
+  <rect x="286" y="530" width="188" height="16" rx="3" fill="rgba(101,214,126,0.07)" stroke="rgba(101,214,126,0.2)" stroke-width="0.5"/>
+  <text x="380" y="542" text-anchor="middle" fill="#65d67e" font-size="8" letter-spacing="0.05em">■ Best Use of Splunk Hosted Models</text>
+
+  <rect x="488" y="530" width="200" height="16" rx="3" fill="rgba(124,109,250,0.07)" stroke="rgba(124,109,250,0.2)" stroke-width="0.5"/>
+  <text x="588" y="542" text-anchor="middle" fill="#9d8ff5" font-size="8" letter-spacing="0.05em">■ Best Use of Splunk Developer Tools</text>
+
+  <rect x="702" y="530" width="112" height="16" rx="3" fill="rgba(255,71,87,0.07)" stroke="rgba(255,71,87,0.2)" stroke-width="0.5"/>
+  <text x="758" y="542" text-anchor="middle" fill="#ff4757" font-size="8" letter-spacing="0.05em">■ Best of Security</text>
+</svg>
